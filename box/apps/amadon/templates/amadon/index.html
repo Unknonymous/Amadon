@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="C:\Users\user\Documents\CodingDojo\Django\Holder6\box\apps\amadon\static\amadon\css\styles.css"> -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'amadon/css/styles.css' %}" >
+    <title>Amadon</title>
+</head>
+<body>
+    <div id="wrapper">
+        <table id='orderTable'>
+            <tr>
+                <th class='top'>Item</th>
+                <th class='top'>Price</th>
+                <th class='top'>Actions</th>
+            </tr>
+
+            <!-- dynamically generate data rows with logic according to session.inventory -->
+            {% for item in request.session.inventory %}
+                <tr>                
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>
+                        <form action='/amadon/buy' method="POST">
+                            {% csrf_token %}
+                            <select name='quantity' class="bttn">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                            <input type='hidden' name='price' value="{{ item.price }}" >
+                            <input type='submit' value="Buy!" class='bttn'>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </table> 
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="C:\Users\user\Documents\CodingDojo\Django\Holder6\box\apps\amadon\static\amadon\css\styles.css"> -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'amadon/css/styles.css' %}" >
+    <title>Amadon Checkout</title>
+</head>
+<body>
+
+    <div id='wrapper'>
+       
+        <h2>Thank you for your business!</h2>
+        <br>
+        <h3>We charged yor credit card for ${{ request.session.charge }}.</h3>
+        <p>You have ordered {{ request.session.count }} items so far and spent ${{ request.session.total }} with Amadon.com!</p>
+        <br>
+        <a href="{% url 'index' %}" id='split'>Go Back</a>
+        
+    </div>
+</body>
+</html>
